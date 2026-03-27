@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --shell: #edf4f1;
+  --paper: #ffffff;
+  --surface: #f4faf7;
+  --soft-blue: #eaf0ff;
+  --soft-green: #edf8ea;
+  --ink: #112132;
+  --muted: #617182;
+  --line: #d9e5e1;
+  --brand-blue: #2457c5;
+  --brand-blue-deep: #17398a;
+  --brand-green: #72bf67;
+  --brand-green-deep: #4d9150;
+  --shadow-soft: 0 24px 60px rgba(17, 33, 50, 0.1);
+  --font-body: "Manrope", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background:
+      radial-gradient(circle at top left, rgba(114, 191, 103, 0.12), transparent 26%),
+      radial-gradient(circle at top right, rgba(36, 87, 197, 0.12), transparent 28%),
+      linear-gradient(180deg, #f7fbf9 0%, #edf4f1 100%);
+    color: var(--ink);
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    color: var(--muted);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: rgba(36, 87, 197, 0.18);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-blue);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .page-wrap {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .card-shell {
+    @apply rounded-[2rem] border border-[color:var(--line)] bg-[color:var(--paper)] shadow-[var(--shadow-soft)];
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center rounded-full border border-white/70 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--brand-blue)];
+  }
+
+  .btn-primary-shell {
+    @apply inline-flex items-center justify-center rounded-full bg-[color:var(--brand-blue)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--brand-blue-deep)];
+  }
+
+  .btn-secondary-shell {
+    @apply inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-5 py-3 text-sm font-semibold text-[color:var(--ink)] transition hover:-translate-y-0.5 hover:border-[color:var(--brand-blue)] hover:text-[color:var(--brand-blue)];
+  }
+
+  .grid-fade {
+    background-image:
+      linear-gradient(rgba(17, 33, 50, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17, 33, 50, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .brand-reveal {
+    animation: brand-reveal 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    transform-origin: center;
+  }
+}
+
+@keyframes brand-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+    filter: blur(8px);
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
