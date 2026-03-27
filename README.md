@@ -84,8 +84,14 @@ Recommended production flow:
 ```bash
 npm ci
 npm run build
+rm -rf .next/standalone/.next/static .next/standalone/public
+mkdir -p .next/standalone/.next .next/standalone/public
+cp -R .next/static .next/standalone/.next/static
+cp -R public/. .next/standalone/public/
 pm2 start ecosystem.config.js --env production
 ```
+
+The helper script at [`deploy/scripts/deploy.sh`](./deploy/scripts/deploy.sh) performs that asset sync automatically so the standalone server can serve CSS, JavaScript, images, and downloadable files correctly.
 
 ## Release Notes
 

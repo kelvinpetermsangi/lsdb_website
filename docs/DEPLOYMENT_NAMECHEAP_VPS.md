@@ -64,6 +64,17 @@ npm run deploy:check
 
 The build is configured with Next.js standalone output, which is better suited for VPS process managers.
 
+Before starting the standalone server, copy the compiled static assets and the `public` directory into the standalone bundle:
+
+```bash
+rm -rf .next/standalone/.next/static .next/standalone/public
+mkdir -p .next/standalone/.next .next/standalone/public
+cp -R .next/static .next/standalone/.next/static
+cp -R public/. .next/standalone/public/
+```
+
+If you use [`deploy/scripts/deploy.sh`](../deploy/scripts/deploy.sh), this step is already included.
+
 ## 5. Start the App with PM2
 
 ```bash
@@ -122,6 +133,10 @@ cd /var/www/lsdb_website/current
 git pull origin main
 npm ci
 npm run build
+rm -rf .next/standalone/.next/static .next/standalone/public
+mkdir -p .next/standalone/.next .next/standalone/public
+cp -R .next/static .next/standalone/.next/static
+cp -R public/. .next/standalone/public/
 pm2 reload ecosystem.config.js --env production
 ```
 

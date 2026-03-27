@@ -45,3 +45,4 @@ yarn-error.log*
 temp-lsdb/
 ENHANCEMENTS_SUMMARY.md
 FIX_SUMMARY.md
+deploy/*.tar.gz
